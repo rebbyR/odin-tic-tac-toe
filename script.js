@@ -6,10 +6,7 @@ const gameboard = (() => {
         ['-', '-', '-']  
     ];
 
-    const markCell = () => {
-
-    }
-    return {board, markCell};
+    return {board};
 })();
 
 const game = ((playerOneName = "Player One", playerTwoName = "Player Two") => {
@@ -36,16 +33,52 @@ const game = ((playerOneName = "Player One", playerTwoName = "Player Two") => {
 
     const notifyTurn = () => {
         console.log(`It is ${getActivePlayer().name}'s turn.`);
+    };
+
+    const chooseCell = () => {
+        let cellChoice = prompt("Enter a spot on the board to mark: ");
+        return cellChoice;
     }
 
-    return {players, switchTurn, getActivePlayer, notifyTurn};
+    return {switchTurn, getActivePlayer, notifyTurn, chooseCell};
 
 })();
 
 
 //worry about this after things work in console
-const displayController = (function() {
+const displayController = (() => {
     //display stuff here
+
+    const displayBoard = () => {
+        for (i in gameboard.board) {
+            let row = document.body.appendChild(document.createElement('div'));
+            row.classList.add(`row`);
+            row.setAttribute('id', `row${i}`);
+        };
+
+        let rows = document.getElementsByClassName('row');
+
+        for (i in gameboard.board[0]) {
+            let cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.setAttribute('id', `0-${i}`);
+            rows[0].appendChild(cell);
+        };
+        for (i in gameboard.board[1]) {
+            let cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.setAttribute('id', `1-${i}`);
+            rows[1].appendChild(cell);
+        };
+        for (i in gameboard.board[2]) {
+            let cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.setAttribute('id', `2-${i}`);
+            rows[2].appendChild(cell);
+        };
+    };
+
+    return {displayBoard};
 })();
 
 

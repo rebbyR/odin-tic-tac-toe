@@ -1,3 +1,13 @@
 body {
-    background-color: gray;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 50vw;
+    height: 50vh;
+    justify-content: center;
+    margin: auto;
+}
+
+div {
+    border: 1px solid black;
 }
