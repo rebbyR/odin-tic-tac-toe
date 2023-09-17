@@ -85,89 +85,101 @@ const displayController = (() => {
     };
 
     const refreshBoard = () => {
-        const body = document.querySelector('body');
-        while (body.lastElementChild) {
-            body.removeChild(body.lastElementChild);
+       const cells = document.querySelectorAll('.cell')
+
+       
+       for (i in cells) {
+        i.textContent = '';
+       };
+
+       for (i=0; i < 3; i++) {
+            cells[i].textContent = gameboard.board[0][i];
+        };
+
+        for (i=3; i < 6; i++) {
+            cells[i].textContent = gameboard.board[1][i-3];
+        };
+        
+        for (i=6; i < 9; i++) {
+            cells[i].textContent = gameboard.board[2][i-6];
         };
     };
+    
 
-    return {displayBoard, refreshBoard};
+    const addListeners = () => {
+
+        const cells = document.querySelectorAll('.cell');
+
+        
+        cells[0].addEventListener('click', () => {
+            gameboard.board[0][0] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);                
+        });
+        
+        cells[1].addEventListener('click', () => {
+            gameboard.board[0][1] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);
+        }); 
+        
+        cells[2].addEventListener('click', () => {
+            gameboard.board[0][2] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);
+        }); 
+        
+        cells[3].addEventListener('click', () => {
+            gameboard.board[1][0] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);
+        }); 
+        
+        cells[4].addEventListener('click', () => {
+            gameboard.board[1][1] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);
+        }); 
+        
+        cells[5].addEventListener('click', () => {
+            gameboard.board[1][2] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);
+        }); 
+        
+        cells[6].addEventListener('click', () => {
+            gameboard.board[2][0] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);
+        }); 
+        
+        cells[7].addEventListener('click', () => {
+            gameboard.board[2][1] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);
+        }); 
+        
+        cells[8].addEventListener('click', () => {
+            gameboard.board[2][2] = game.getActivePlayer().marker;
+            game.switchTurn();
+            displayController.refreshBoard();
+            console.log(gameboard.board);
+        }); 
+    };
+
+    return {displayBoard, refreshBoard, addListeners};
 })();
 
 
 //running stuff
 console.log(gameboard.board);
 displayController.displayBoard();
-
-const cells = document.querySelectorAll('.cell');
-
-cells[0].addEventListener('click', () => {
-    gameboard.board[0][0] = game.getActivePlayer().marker;
-    game.switchTurn();
-    console.log(gameboard.board);
-});
-
-cells[1].addEventListener('click', () => {
-    gameboard.board[0][1] = game.getActivePlayer().marker;
-    game.switchTurn();
-    displayController.refreshBoard();
-    displayController.displayBoard();
-    console.log(gameboard.board);
-}); 
-
-cells[2].addEventListener('click', () => {
-    gameboard.board[0][2] = game.getActivePlayer().marker;
-    game.switchTurn();
-    displayController.refreshBoard();
-    displayController.displayBoard();
-    console.log(gameboard.board);
-}); 
-
-cells[3].addEventListener('click', () => {
-    gameboard.board[1][0] = game.getActivePlayer().marker;
-    game.switchTurn();
-    displayController.refreshBoard();
-    displayController.displayBoard();
-    console.log(gameboard.board);
-}); 
-
-cells[4].addEventListener('click', () => {
-    gameboard.board[1][1] = game.getActivePlayer().marker;
-    game.switchTurn();
-    displayController.refreshBoard();
-    displayController.displayBoard();
-    console.log(gameboard.board);
-}); 
-
-cells[5].addEventListener('click', () => {
-    gameboard.board[1][2] = game.getActivePlayer().marker;
-    game.switchTurn();
-    displayController.refreshBoard();
-    displayController.displayBoard();
-    console.log(gameboard.board);
-}); 
-
-cells[6].addEventListener('click', () => {
-    gameboard.board[2][0] = game.getActivePlayer().marker;
-    game.switchTurn();
-    displayController.refreshBoard();
-    displayController.displayBoard();
-    console.log(gameboard.board);
-}); 
-
-cells[7].addEventListener('click', () => {
-    gameboard.board[2][1] = game.getActivePlayer().marker;
-    game.switchTurn();
-    displayController.refreshBoard();
-    displayController.displayBoard();
-    console.log(gameboard.board);
-}); 
-
-cells[8].addEventListener('click', () => {
-    gameboard.board[2][2] = game.getActivePlayer().marker;
-    game.switchTurn();
-    displayController.refreshBoard();
-    displayController.displayBoard();
-    console.log(gameboard.board);
-}); 
-
+displayController.addListeners();
