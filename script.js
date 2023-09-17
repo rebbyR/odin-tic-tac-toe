@@ -85,8 +85,6 @@ const displayController = (() => {
     };
 
     const refreshBoard = () => {
-       const cells = document.querySelectorAll('.cell')
-
        
        for (i in cells) {
         i.textContent = '';
@@ -107,71 +105,86 @@ const displayController = (() => {
     
 
     const addListeners = () => {
-
-        const cells = document.querySelectorAll('.cell');
-
         
         cells[0].addEventListener('click', () => {
-            gameboard.board[0][0] = game.getActivePlayer().marker;
-            game.switchTurn();
-            displayController.refreshBoard();
-            console.log(gameboard.board);                
+            if (cells[0].textContent === '') {           
+                gameboard.board[0][0] = game.getActivePlayer().marker;
+                game.switchTurn();
+                displayController.refreshBoard();
+                console.log(gameboard.board);                
+            };  
         });
         
         cells[1].addEventListener('click', () => {
-            gameboard.board[0][1] = game.getActivePlayer().marker;
-            game.switchTurn();
-            displayController.refreshBoard();
-            console.log(gameboard.board);
+            if (cells[1].textContent === '') {
+                gameboard.board[0][1] = game.getActivePlayer().marker;
+                game.switchTurn();
+                displayController.refreshBoard();
+                console.log(gameboard.board);
+            };
         }); 
         
         cells[2].addEventListener('click', () => {
-            gameboard.board[0][2] = game.getActivePlayer().marker;
-            game.switchTurn();
-            displayController.refreshBoard();
-            console.log(gameboard.board);
+            if (cells[2].textContent === '') {
+                gameboard.board[0][2] = game.getActivePlayer().marker;
+                game.switchTurn();
+                displayController.refreshBoard();
+                console.log(gameboard.board);                
+            };
         }); 
         
         cells[3].addEventListener('click', () => {
-            gameboard.board[1][0] = game.getActivePlayer().marker;
-            game.switchTurn();
-            displayController.refreshBoard();
-            console.log(gameboard.board);
+            if (cells[3].textContent === '') {
+                gameboard.board[1][0] = game.getActivePlayer().marker;
+                game.switchTurn();
+                displayController.refreshBoard();
+                console.log(gameboard.board);                
+            };
         }); 
         
         cells[4].addEventListener('click', () => {
-            gameboard.board[1][1] = game.getActivePlayer().marker;
-            game.switchTurn();
-            displayController.refreshBoard();
-            console.log(gameboard.board);
+            if (cells[4].textContent === '') {
+                gameboard.board[1][1] = game.getActivePlayer().marker;
+                game.switchTurn();
+                displayController.refreshBoard();
+                console.log(gameboard.board);                
+            };
         }); 
         
         cells[5].addEventListener('click', () => {
-            gameboard.board[1][2] = game.getActivePlayer().marker;
-            game.switchTurn();
-            displayController.refreshBoard();
-            console.log(gameboard.board);
+            if (cells[5].textContent === '') {
+                gameboard.board[1][2] = game.getActivePlayer().marker;
+                game.switchTurn();
+                displayController.refreshBoard();
+                console.log(gameboard.board);                
+            };
         }); 
         
         cells[6].addEventListener('click', () => {
-            gameboard.board[2][0] = game.getActivePlayer().marker;
-            game.switchTurn();
-            displayController.refreshBoard();
-            console.log(gameboard.board);
+            if (cells[6].textContent === '') {
+                gameboard.board[2][0] = game.getActivePlayer().marker;
+                game.switchTurn();
+                displayController.refreshBoard();
+                console.log(gameboard.board);                
+            };
         }); 
         
         cells[7].addEventListener('click', () => {
-            gameboard.board[2][1] = game.getActivePlayer().marker;
-            game.switchTurn();
-            displayController.refreshBoard();
-            console.log(gameboard.board);
+            if (cells[7].textContent === '') {
+                gameboard.board[2][1] = game.getActivePlayer().marker;
+                game.switchTurn();
+                displayController.refreshBoard();
+                console.log(gameboard.board);                
+            };
         }); 
         
         cells[8].addEventListener('click', () => {
+            if (cells[8].textContent === '') {
             gameboard.board[2][2] = game.getActivePlayer().marker;
             game.switchTurn();
             displayController.refreshBoard();
-            console.log(gameboard.board);
+            console.log(gameboard.board);                
+            };  
         }); 
     };
 
@@ -182,4 +195,5 @@ const displayController = (() => {
 //running stuff
 console.log(gameboard.board);
 displayController.displayBoard();
+const cells = document.querySelectorAll('.cell');
 displayController.addListeners();
