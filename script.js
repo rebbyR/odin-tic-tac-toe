@@ -31,22 +31,84 @@ const game = ((playerOneName = "Player One", playerTwoName = "Player Two") => {
 
     const getActivePlayer = () => activePlayer;
 
-    const notifyTurn = () => {
-        console.log(`It is ${getActivePlayer().name}'s turn.`);
+    const checkWinner = () => {
+        
+        if (gameboard.board[0][0] === 'X' && gameboard.board[0][1] === 'X' && gameboard.board[0][2] === 'X') {
+                winner = players[0].name;
+                game.endGameWinner();
+        }
+        else if (gameboard.board[1][0] === 'X' && gameboard.board[1][1] === 'X' && gameboard.board[1][2] === 'X') {
+                winner = players[0].name;
+                game.endGameWinner();
+        }
+        else if (gameboard.board[2][0] === 'X' && gameboard.board[2][1] === 'X' && gameboard.board[2][2] === 'X') {
+            winner = players[0].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[0][0] === 'X' && gameboard.board[1][0] === 'X' && gameboard.board[2][0] === 'X') {
+            winner = players[0].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[0][1] === 'X' && gameboard.board[1][1] === 'X' && gameboard.board[2][1] === 'X') {
+            winner = players[0].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[0][2] === 'X' && gameboard.board[1][2] === 'X' && gameboard.board[2][2] === 'X') {
+            winner = players[0].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[0][0] === 'O' && gameboard.board[0][1] === 'O' && gameboard.board[0][2] === 'O') {
+            winner = players[1].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[1][0] === 'O' && gameboard.board[1][1] === 'O' && gameboard.board[1][2] === 'O') {
+            winner = players[1].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[2][0] === 'O' && gameboard.board[2][1] === 'O' && gameboard.board[2][2] === 'O') {
+            winner = players[0].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[0][0] === 'O' && gameboard.board[1][0] === 'O' && gameboard.board[2][0] === 'O') {
+            winner = players[1].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[0][1] === 'O' && gameboard.board[1][1] === 'O' && gameboard.board[2][1] === 'O') {
+            winner = players[1].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[0][2] === 'O' && gameboard.board[1][2] === 'O' && gameboard.board[2][2] === 'O') {
+            winner = players[1].name;
+            game.endGameWinner();
+        }
+        else if (gameboard.board[0][0] === 'O' && gameboard.board[1][1] === 'O' && gameboard.board[2][2] === 'O') {
+            winner = players[1].name;
+            game.endGameWinner();
+        }
+        else if (cells[0].textContent !== '' && cells[1].textContent !== '' &&
+            cells[2].textContent !== '' && cells[3].textContent !== '' && cells[4].textContent !== '' &&
+            cells[5].textContent !== '' && cells[6].textContent !== '' && cells[7].textContent !== '' && 
+            cells[8].textContent !== '') {
+                game.endGameTie();
+        }
     };
 
-    const chooseCell = () => {
-        let cellChoice = prompt("Enter a spot on the board to mark: ");
-        return cellChoice;
-    }
+    const endGameWinner = () => {
+        displayController.declareWinner();
+    };
 
-    return {switchTurn, getActivePlayer, notifyTurn, chooseCell};
+    const endGameTie = () => {
+        displayController.declareTie();
+    };
+
+    return {switchTurn, getActivePlayer, checkWinner, endGameWinner, endGameTie};
 
 })();
 
-//worry about this after things work in console
 const displayController = (() => {
     //display stuff here
+
+    const body = document.querySelector('body');
 
     const displayBoard = () => {
         //create empty display before refreshing
@@ -101,6 +163,9 @@ const displayController = (() => {
         for (i=6; i < 9; i++) {
             cells[i].textContent = gameboard.board[2][i-6];
         };
+
+        displayController.notifyTurn();
+        game.checkWinner();
     };
     
 
@@ -188,12 +253,33 @@ const displayController = (() => {
         }); 
     };
 
-    return {displayBoard, refreshBoard, addListeners};
+    const notifyTurn = () => {
+        textDisplay.textContent = `It is ${game.getActivePlayer().name}'s turn.`;
+    };
+
+    const createTextDisplay = () => {
+        const textDisplay = document.createElement('p');
+        textDisplay.textContent = 'Ready to play!';
+        textDisplay.classList.add('text-display');
+        body.appendChild(textDisplay);
+        return textDisplay;
+    };
+
+    const declareTie = () => {
+        textDisplay.textContent = 'Tie!';
+    };
+
+    const declareWinner = () => {
+        textDisplay.textContent = `${winner} wins!`
+    };
+
+    return {displayBoard, refreshBoard, addListeners, createTextDisplay, notifyTurn, declareTie, declareWinner};
 })();
 
 
 //running stuff
-console.log(gameboard.board);
 displayController.displayBoard();
 const cells = document.querySelectorAll('.cell');
 displayController.addListeners();
+displayController.createTextDisplay();
+const textDisplay = document.querySelector('.text-display');
