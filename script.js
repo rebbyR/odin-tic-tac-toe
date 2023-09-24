@@ -101,13 +101,23 @@ const game = ((playerOneName = "Player One", playerTwoName = "Player Two") => {
         displayController.declareTie();
     };
 
-    return {switchTurn, getActivePlayer, checkWinner, endGameWinner, endGameTie};
+    const resetGame = () => {
+       gameboard.board = [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']  
+        ];
+        displayController.refreshBoard();
+        activePlayer = players[0];
+        game.getActivePlayer();
+        displayController.textDisplayReset();
+    };
+
+    return {switchTurn, getActivePlayer, checkWinner, endGameWinner, endGameTie, resetGame};
 
 })();
 
 const displayController = (() => {
-    //display stuff here
-
     const body = document.querySelector('body');
 
     const displayBoard = () => {
@@ -257,6 +267,10 @@ const displayController = (() => {
         textDisplay.textContent = `It is ${game.getActivePlayer().name}'s turn.`;
     };
 
+    const textDisplayReset = () => {
+        textDisplay.textContent = `New game! It is ${game.getActivePlayer().name}'s turn.`;
+    }
+
     const createTextDisplay = () => {
         const textDisplay = document.createElement('p');
         textDisplay.textContent = 'Ready to play!';
@@ -273,11 +287,13 @@ const displayController = (() => {
         textDisplay.textContent = `${winner} wins!`
     };
 
-    return {displayBoard, refreshBoard, addListeners, createTextDisplay, notifyTurn, declareTie, declareWinner};
+    return {displayBoard, refreshBoard, addListeners, 
+        createTextDisplay, notifyTurn, declareTie, declareWinner, textDisplayReset};
 })();
 
 
 //running stuff
+
 displayController.displayBoard();
 const cells = document.querySelectorAll('.cell');
 displayController.addListeners();
